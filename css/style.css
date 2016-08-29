@@ -1,0 +1,64 @@
+html {
+  box-sizing: border-box;
+}
+*, *:before, *:after {
+  box-sizing: inherit;
+}
+
+body {
+    font-family: 'Roboto', sans-serif;
+    font-size: 16px;
+    -webkit-font-smoothing: antialiased;
+}
+
+* {
+	text-align: center;
+}
+
+#content {
+    width: 750px;
+    height: 2720px;
+    margin: 0 auto;
+    padding: 0px 15px;
+    font-size: 16px;
+	color: #838994;
+	letter-spacing: 0.03em;
+	padding: 1em;
+	border: solid blue .05em;
+}
+
+#etsy-images {
+	height: 2450px;
+}
+
+#logo {
+	background-image: url("https://upload.wikimedia.org/wikipedia/commons/c/ce/Etsy_logo.png");
+	background-repeat: no-repeat;
+	height: 120px;
+	width: 200px;
+	text-align: center;
+	margin: 0 auto;
+}
+
+.searchterm {
+	display: inline-block;
+	background-color: blue;
+	color: white;
+	width: 7em;
+	height: 2em;
+	margin: .5em;
+}
+
+img {
+	padding: .4em;
+	margin: 1em;
+	border: solid black .1em;
+}
+
+#paginate > * {
+	display: inline;
+}
+
+#page-number {
+	margin: 0 .5em;
+}
