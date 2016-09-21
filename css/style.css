@@ -17,7 +17,7 @@ body {
 
 #content {
     width: 750px;
-    height: 2720px;
+    height: 775px;
     margin: 0 auto;
     padding: 0px 15px;
     font-size: 16px;
@@ -25,10 +25,24 @@ body {
 	letter-spacing: 0.03em;
 	padding: 1em;
 	border: solid blue .05em;
+	border-radius: 2%;
+	background-color: #fffdf4;
+}
+
+
+#etsy-terms {
+	margin-left: 5.5em;
+}
+
+#search-submit {
+	margin-left: 1em;
 }
 
 #etsy-images {
-	height: 2450px;
+	height: 490px;
+	overflow: auto;
+	background-color: white;
+	border: solid black .05em;
 }
 
 #logo {
@@ -53,6 +67,10 @@ img {
 	padding: .4em;
 	margin: 1em;
 	border: solid black .1em;
+}
+
+#paginate {
+	margin-top: 1em;
 }
 
 #paginate > * {

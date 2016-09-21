@@ -16,12 +16,6 @@ $(document).ready(function(){
     $('#forward').on('click', runSearch('paginate', 1));
 });
 
-function paginate(direction) {
-
-}
-
-var offset, terms;
-
 // <<< Management of Search History >>>
 var storage = localStorage;
 var searchHist;
@@ -61,23 +55,12 @@ function removeFromHistory(position) {
 
 
 //<<< run the search >>>
+var offset, terms;
 
 function runSearch(action, value) {
     return function(e) {
         e.preventDefault();
-        if (action == 'newTerm') {
-            terms = $('#etsy-terms').val();
-            offset = 0;
-        } else if (action == 'paginate') {
-            if (offset == undefined) {return}
-            // value ==  directional multiplier
-            offset += 50 * value
-            if (offset < 0) {offset = 0; return;}
-        } else if (action == 'oldTerm') {
-            // value = index of term in History
-            terms = searchHist[value];
-            offset = 0;
-        } 
+        searchtermSet(action, value);
         if (terms == "") return;
 
         var api_key = "b6eg9u7ffbpn8g8m8hvojpxa";
@@ -115,6 +98,22 @@ function runSearch(action, value) {
         });
         return false;
     }
+}
+
+function searchtermSet(action, value) {
+    if (action == 'newTerm') {
+        terms = $('#etsy-terms').val();
+        offset = 0;
+    } else if (action == 'paginate') {
+        if (offset == undefined) {return}
+        // value ==  directional multiplier
+        offset += 50 * value
+        if (offset < 0) {offset = 0; return;}
+    } else if (action == 'oldTerm') {
+        // value = index of term in History
+        terms = searchHist[value];
+        offset = 0;
+    } 
 }
 
 /* 
