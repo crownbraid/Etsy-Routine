@@ -87,16 +87,20 @@ img {
 	border: solid #000080 .1em;
 }
 
-#paginate {
-	margin-top: .9em;
-}
-
 #paginate > * {
 	display: inline;
 }
 
-#paginate button {
-	border: solid #000080 .1em;
+button {
+	cursor: pointer;
+}
+
+.paginate-controls {
+	background-color: hsl(165, 100%, 98%);
+	border: none;
+	color: #f32136;
+	outline:none;
+	font-size: 1.9em;
 }
 
 #page-number {
@@ -108,7 +112,7 @@ img {
 	margin-bottom: .8em;
 }
 #clear-history {
-	margin-top: -1.9em;
+	margin-top: -2.2em;
 	margin-right: 1em;
 	float: right;
 	border: solid #000080 .1em;

@@ -12,7 +12,6 @@ $(document).ready(function(){
     $('#search-history').on('mousedown', function(event) {
         if (click) {
             termSlot = parseInt($(event.target).closest('button').data('name'));
-            console.log(termSlot);
             if (!termChange) {
                 cancelClick = setTimeout(function() {setTerm(termSlot);}, 500);
             }
@@ -76,7 +75,6 @@ $(document).ready(function(){
             url: etsyURL,
             dataType: 'jsonp',
             success: function(data) {
-                console.log(data);
                 if (data.ok) {
                     paginate = true;
                     if (action == 'newTerm') addToHistory(terms);
