@@ -9,6 +9,7 @@ body {
     font-family: 'Roboto', sans-serif;
     font-size: 16px;
     -webkit-font-smoothing: antialiased;
+    background-color: hsl(165, 100%, 98%);
 }
 
 * {
@@ -24,9 +25,13 @@ body {
 	color: #838994;
 	letter-spacing: 0.03em;
 	padding: 1em;
-	border: solid blue .05em;
+	border: solid black .1em;
 	border-radius: 2%;
 	background-color: #fffdf4;
+	position: absolute;
+  	top: 50%;
+  	left: 50%;
+  	transform: translate(-50%, -50.5%);
 }
 
 
@@ -39,28 +44,34 @@ body {
 }
 
 #etsy-images {
-	height: 490px;
+	height: 33.2em;
 	overflow: auto;
 	background-color: white;
 	border: solid black .05em;
+	margin: .25em;
 }
 
 #logo {
-	background-image: url("https://upload.wikimedia.org/wikipedia/commons/c/ce/Etsy_logo.png");
+	background-image: url("../images/logo.png");
 	background-repeat: no-repeat;
-	height: 120px;
-	width: 200px;
+	height: 13%;
+	width: 180px;
 	text-align: center;
 	margin: 0 auto;
+	padding-top: 3.8em;
+	padding-left: 3.5em;
+}
+.searchterm, .searchterm-change, #search, #paginate, #clear-history {
+	font-size: .6em;
 }
 
-.searchterm {
+.searchterm, .searchterm-change {
 	display: inline-block;
 	background-color: blue;
 	color: white;
-	width: 7em;
+	width: 18%;
 	height: 2em;
-	margin: .5em;
+	margin: .41em;
 }
 
 img {
@@ -70,7 +81,7 @@ img {
 }
 
 #paginate {
-	margin-top: 1em;
+	margin-top: .9em;
 }
 
 #paginate > * {
@@ -79,4 +90,17 @@ img {
 
 #page-number {
 	margin: 0 .5em;
+}
+
+#search-history {
+	margin-bottom: .8em;
+}
+#clear-history {
+	margin-top: -1.9em;
+	margin-right: 1em;
+	float: right;
+}
+footer button {
+	background-color: blue;
+	color: white;
 }

@@ -1,65 +1,68 @@
 $(document).ready(function(){
 
     // <<< searchbar >>>
-    $('#search').on('submit', runSearch('newTerm'));
+    $('#search').on('submit', runSearchjQuery('newTerm'));
 
     // <<< load search history from localStorage >>>
     getHistory();
-    $('#term1').on('click', runSearch('oldTerm', 0));
-    $('#term2').on('click', runSearch('oldTerm', 1));
-    $('#term3').on('click', runSearch('oldTerm', 2));
-    $('#term4').on('click', runSearch('oldTerm', 3));
-    $('#term5').on('click', runSearch('oldTerm', 4));
+
+    // <<< run old Search >>>
+    var cancelClick, click = true, termSlot = NaN, termChange = false, termID;
+
+    $('#search-history').on('mousedown', function(event) {
+        if (click) {
+            termSlot = parseInt($(event.target).closest('button').data('name'));
+            console.log(termSlot);
+            if (!termChange) {
+                cancelClick = setTimeout(function() {setTerm(termSlot);}, 500);
+            }
+        }
+    }).bind('mouseup', function() {
+        if (click) {
+            clearTimeout(cancelClick);
+            if (termSlot > -1) { runSearch('oldTerm', parseInt(termSlot)); }
+        }
+    }).keypress(function (e) {
+        if (e.which == 13 && termChange == true) {
+            var newValue = $('#' + termID).val();
+            searchHist[termSlot] = newValue;
+            backupHistory();
+            $('#' + termID).replaceWith("<button class='searchterm' id='" + termID + "' data-name='" + termSlot + "'>" + newValue + "</button>");
+            termChange = false;
+            click = true;
+            paginate = true;
+            return;
+        }
+    });
 
     // <<< paginate >>>
-    $('#backward').on('click', runSearch('paginate', -1));
-    $('#forward').on('click', runSearch('paginate', 1));
-});
+    var paginate = false;
 
-// <<< Management of Search History >>>
-var storage = localStorage;
-var searchHist;
-
-function getHistory() {
-    if (storage.hasOwnProperty('searchHistory')) {
-        searchHist = JSON.parse(storage['searchHistory']);
-        searchHist = searchHist.terms;
-    } else {
-        searchHist = ["", "", "", "", ""];
-        backupHistory();
+    if (paginate) {
+        $('#backward').on('click', runSearchjQuery('paginate', -1));
+        $('#forward').on('click', runSearchjQuery('paginate', 1));
     }
-    updateSearchHistoryInterface();
-}
-function backupHistory() {
-    storage.setItem('searchHistory', JSON.stringify({terms: searchHist}));
-    console.log(searchHist);
-}
-function updateSearchHistoryInterface() {
-    searchHist.forEach(function(term, i) {
-       $('#term' + (i + 1)).html(term); 
-    });
-}
-function addToHistory(item) {
-    var index = searchHist.findIndex(function(term) {
-        return term === "";
-    });
-    if (index == -1) return;
-    searchHist[index] = item;
-    updateSearchHistoryInterface();
-    backupHistory();
-}
-function removeFromHistory(position) {
-    searchHist[position] = "";
-    updateSearchHistoryInterface();
-}
 
+    function setTerm(termSlot) {
+        termChange = true;
+        click = false;
+        paginate = false;
+        termID = 'term' + (termSlot + 1);
+        $('#' + termID).replaceWith("<input class='searchterm-change' id='" + termID + "' maxlength='29'></input>");
+        $('#' + termID).focus(); 
+    }
 
-//<<< run the search >>>
-var offset, terms;
+    //<<< run the search >>>
+    var offset, terms;
 
-function runSearch(action, value) {
-    return function(e) {
-        e.preventDefault();
+    function runSearchjQuery(action, value) {
+        return function(e) {
+            e.preventDefault();
+            runSearch(action, value);
+        }
+    }
+
+    function runSearch(action, value) {
         searchtermSet(action, value);
         if (terms == "") return;
 
@@ -67,7 +70,7 @@ function runSearch(action, value) {
         var etsyURL = "https://openapi.etsy.com/v2/listings/active.js?keywords="+
             terms+"&limit=100&offset=" + offset + "&includes=Images:1&api_key="+api_key;
 
-        $('#etsy-images').empty().text('Searching for '+ terms);
+        $('#etsy-images').empty().html('</br>Searching for '+ terms);
         
         $.ajax({
             url: etsyURL,
@@ -75,6 +78,7 @@ function runSearch(action, value) {
             success: function(data) {
                 console.log(data);
                 if (data.ok) {
+                    paginate = true;
                     if (action == 'newTerm') addToHistory(terms);
                     $('#etsy-images').empty();
                     if (data.count > 0) {
@@ -98,24 +102,61 @@ function runSearch(action, value) {
         });
         return false;
     }
-}
 
-function searchtermSet(action, value) {
-    if (action == 'newTerm') {
-        terms = $('#etsy-terms').val();
-        offset = 0;
-    } else if (action == 'paginate') {
-        if (offset == undefined) {return}
-        // value ==  directional multiplier
-        offset += 50 * value
-        if (offset < 0) {offset = 0; return;}
-    } else if (action == 'oldTerm') {
-        // value = index of term in History
-        terms = searchHist[value];
-        offset = 0;
-    } 
-}
+    function searchtermSet(action, value) {
+        if (action == 'newTerm') {
+            terms = $('#etsy-terms').val();
+            offset = 0;
+        } else if (action == 'paginate') {
+            if (offset == undefined) {return}
+            // value ==  directional multiplier
+            offset += 50 * value
+            if (offset < 0) {offset = 0; return;}
+        } else if (action == 'oldTerm') {
+            // value = index of term in History
+            terms = searchHist[value];
+            offset = 0;
+        } 
+    }
 
-/* 
-switch out span with input temporarily and then invert.
-*/
+    $('#clear-history').on('click', function() {
+        if (confirm("Are you sure you want to delete your history?")) {
+            localStorage.clear();
+            getHistory();
+        }            
+    });
+
+});
+
+// <<< Management of Search History >>>
+
+var storage = localStorage;
+var searchHist;
+
+function getHistory() {
+    if (storage.hasOwnProperty('searchHistory')) {
+        searchHist = JSON.parse(storage['searchHistory']);
+        searchHist = searchHist.terms;
+    } else {
+        searchHist = ["", "", "", "", "", "", "", "", "", ""];
+        backupHistory();
+    }
+    updateSearchHistoryInterface();
+}
+function backupHistory() {
+    storage.setItem('searchHistory', JSON.stringify({terms: searchHist}));
+}
+function updateSearchHistoryInterface() {
+    searchHist.forEach(function(term, i) {
+       $('#term' + (i + 1)).html(term); 
+    });
+}
+function addToHistory(item) {
+    var index = searchHist.findIndex(function(term) {
+        return term === "";
+    });
+    if (index == -1) return;
+    searchHist[index] = item;
+    updateSearchHistoryInterface();
+    backupHistory();
+}
