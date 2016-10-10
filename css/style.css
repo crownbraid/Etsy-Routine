@@ -9,7 +9,7 @@ body {
     font-family: 'Roboto', sans-serif;
     font-size: 16px;
     -webkit-font-smoothing: antialiased;
-    background-color: hsl(165, 100%, 98%);
+    background-color: #fffdf4;
 }
 
 * {
@@ -25,9 +25,9 @@ body {
 	color: #838994;
 	letter-spacing: 0.03em;
 	padding: 1em;
-	border: solid black .1em;
+	border: solid #000080 .1em;
 	border-radius: 2%;
-	background-color: #fffdf4;
+	background-color: hsl(165, 100%, 98%);
 	position: absolute;
   	top: 50%;
   	left: 50%;
@@ -47,7 +47,7 @@ body {
 	height: 33.2em;
 	overflow: auto;
 	background-color: white;
-	border: solid black .05em;
+	border: .05em solid #000080;
 	margin: .25em;
 }
 
@@ -58,8 +58,12 @@ body {
 	width: 180px;
 	text-align: center;
 	margin: 0 auto;
-	padding-top: 3.8em;
-	padding-left: 3.5em;
+	padding-top: 3.55em;
+	padding-left: 4.55em;
+	letter-spacing: .27em;
+	font-family: 'Palatino Linotype';
+	color: white;
+	-webkit-text-stroke: .03em #000080;
 }
 .searchterm, .searchterm-change, #search, #paginate, #clear-history {
 	font-size: .6em;
@@ -77,7 +81,7 @@ body {
 img {
 	padding: .4em;
 	margin: 1em;
-	border: solid black .1em;
+	border: solid #000080 .1em;
 }
 
 #paginate {

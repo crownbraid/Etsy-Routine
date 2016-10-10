@@ -123,6 +123,7 @@ $(document).ready(function(){
         if (confirm("Are you sure you want to delete your history?")) {
             localStorage.clear();
             getHistory();
+            $('#etsy-terms').val('').focus();
         }            
     });
 
