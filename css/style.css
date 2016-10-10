@@ -37,6 +37,7 @@ body {
 
 #etsy-terms {
 	margin-left: 5.5em;
+	color: #f32136;
 }
 
 #search-submit {
@@ -49,6 +50,7 @@ body {
 	background-color: white;
 	border: .1em solid #000080;
 	margin: .25em;
+	color: #f32136;
 }
 
 #logo {
@@ -76,6 +78,7 @@ body {
 	width: 18%;
 	height: 2em;
 	margin: .41em;
+	border: solid #000080 .1em;
 }
 
 img {
@@ -92,8 +95,13 @@ img {
 	display: inline;
 }
 
+#paginate button {
+	border: solid #000080 .1em;
+}
+
 #page-number {
 	margin: 0 .5em;
+	color: #000080;
 }
 
 #search-history {
@@ -103,6 +111,7 @@ img {
 	margin-top: -1.9em;
 	margin-right: 1em;
 	float: right;
+	border: solid #000080 .1em;
 }
 footer button {
 	background-color: blue;

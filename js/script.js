@@ -70,7 +70,7 @@ $(document).ready(function(){
         var etsyURL = "https://openapi.etsy.com/v2/listings/active.js?keywords="+
             terms+"&limit=100&offset=" + offset + "&includes=Images:1&api_key="+api_key;
 
-        $('#etsy-images').empty().html('</br>Searching for '+ terms);
+        $('#etsy-images').empty().html('</br>searching for <em>"'+ terms + '"</em>');
         
         $.ajax({
             url: etsyURL,
