@@ -95,11 +95,13 @@ button {
 	cursor: pointer;
 }
 
-.paginate-controls {
+.paginate-controls, #clear-history {
 	background-color: hsl(165, 100%, 98%);
 	border: none;
 	color: #f32136;
 	outline:none;
+}
+.paginate-controls {
 	font-size: 1.9em;
 }
 
@@ -112,10 +114,10 @@ button {
 	margin-bottom: .8em;
 }
 #clear-history {
-	margin-top: -2.2em;
+	margin-top: -1.8em;
 	margin-right: 1em;
 	float: right;
-	border: solid #000080 .1em;
+	font-size: .8em;
 }
 footer button {
 	background-color: blue;
