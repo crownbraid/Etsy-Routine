@@ -9,4 +9,4 @@ New searches are automatically saved to local storage and inserted in the blue s
 To change a saved term, click and hold the button. Press enter to confirm the change.
 
 ## Technologies:
-Javascript, jQuery, Etsy API, localStorage
+Javascript, jQuery, Etsy API, HTML, CSS, localStorage
