@@ -7,3 +7,6 @@ A simple SPA for streamlining Etsy search routines. For users who consistently u
 New searches are automatically saved to local storage and inserted in the blue search buttons. 
 
 To change a saved term, click and hold the button. Press enter to confirm the change.
+
+## Technologies:
+Javascript, jQuery, Etsy API, localStorage
